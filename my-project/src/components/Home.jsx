@@ -51,7 +51,7 @@ const Home = () => {
         }).catch(err => console.log(err))
     }
   return (
-    <div style={{'background-image': `url(${bg})`}} className=' w-full flex flex-col items-center justify-center h-screen bg-no-repeat bg-center bg-cover'>
+    <div style={{'background-image': `url(${bg})`}} className='w-full flex flex-col items-center justify-center h-screen bg-no-repeat bg-center bg-cover'>
         {
             auth ? 
             <div className='bg-white max-h-[500px] overflow-x-hidden overflow-scroll rounded-lg px-3 pb-4'>
@@ -75,7 +75,7 @@ const Home = () => {
                     </thead>
                     <tbody className=''>
                         {student.filter((each) => {
-                            if(search == ''){
+                            if(search === ''){
                                 return each;
                             } else if(each.name.toLowerCase().includes(search.toLowerCase())) {
                                 return each

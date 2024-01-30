@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import bg from '../assets/bg.jpg'
 import img from '../assets/image.jpg'
 import arrow from '../assets/Right.png'
@@ -41,12 +41,12 @@ const Timein = () => {
   }
 
   return (
-    <div style={{'background-image': `url(${bg})`}} className=' w-full h-full bg-no-repeat bg-center bg-cover'>
-        <div className='flex mx-48 py-20 justify-center '>
+    <div style={{'background-image': `url(${bg})`}} className='overflow-y-hidden w-full flex flex-col items-center justify-center h-screen bg-no-repeat bg-center bg-cover'>
+        <div className='flex mx-48 py-20 justify-center items-center '>
           <img src={img} alt="img" className='h-[600px] items-center rounded-tl-xl rounded-bl-xl' />
           <div className='h-full pt-10 px-10 pb-[173px] justify-between flex items-center w-full relative bg-[#242424] rounded-br-xl rounded-tr-xl '>
               <div className='mt-10 flex flex-col gap-20 text-white'>
-                <div className='flex items-center gap-52'>
+                <div className='flex items-center gap-28'>
                   <div className='flex gap-4 text-[#D0D0D0] text-[10px] items-center'>
                   <button><button className=' bg-[#4A4A4A]  px-3 py-1 rounded-sm'>Time in </button></button>
                     <p>|</p>
@@ -56,22 +56,22 @@ const Timein = () => {
                     <p>{date.toLocaleString()}</p>
                   </div>
                 </div>
-                <div className='flex gap-20'>
+                <div className='flex gap-10'>
                   <div className='w-[30%] flex flex-col gap-3'>
                     <p className='text-[10px] text-[#D0D0D0]'>Welcome</p>
-                    <h1 className='font-bold text-4xl'>Fill the Form for Library Attendance</h1>
+                    <h1 className='font-bold text-3xl'>Library Attendance</h1>
                   </div>
-                  <div className='flex flex-col ml-14'>
-                    <h1 className='text-[35px] font-bold'>Time In</h1>
+                  <div className='flex relative flex-col ml-14'>
+                    <h1 className='text-[30px] font-bold'>Time In</h1>
                     <form onSubmit={Submit}>
                       <div className='flex flex-col mt-3'>
-                        <input value={student_info_id} required onChange={handleUsn} type="number" placeholder='USN' className='bg-[#4A4A4A] remove-arrow text-[#ffffff] text-[12px] pr-36 pl-2 py-4 rounded-md border-[#929292] border-2' />
+                        <input value={student_info_id} required onChange={handleUsn} type="number" placeholder='USN' className='bg-[#4A4A4A] remove-arrow text-[#ffffff] text-[12px] pr-20 pl-2 py-4 rounded-md border-[#929292] border-2' />
                       </div>
                       <div className='flex flex-col mt-7'>
-                        <input value={transaction} required onChange={handlePurpose} type="text" placeholder='Purpose' className='bg-[#4A4A4A] text-[#ffffff] text-[12px] pr-36 pl-2 py-4 rounded-md border-[#929292] border-2' />
+                        <input value={transaction} required onChange={handlePurpose} type="text" placeholder='Purpose' className='bg-[#4A4A4A] text-[#ffffff] text-[12px] pr-20 pl-2 py-4 rounded-md border-[#929292] border-2' />
                       </div>
                         <div className='w-24 flex gap-3 mt-3'>
-                          <Link to={`/submit/${student_info_id.length === 0 ? 0 : student_info_id}`} className='text-left bg-[#52cd58] pl-3 py-2 text-[11px] text-black font-bold px-5 rounded-sm'>Check</Link>
+                          <Link to={`/submit/${student_info_id.length === 0 ? 0 : student_info_id}`} className='text-left text-white bg-blue-500 pl-3 py-2 text-[11px] font-medium px-5 rounded-sm'>Check</Link>
                           <button className='text-left bg-[#DFD46F] pl-3 py-2 text-[11px] text-black font-bold pr-7 rounded-sm flex gap-3'>Submit<img src={arrow} alt="arrow" /></button>
                         </div>
                     </form>  
