@@ -57,7 +57,7 @@ const Home = () => {
             <div className='bg-white max-h-[500px] overflow-x-hidden overflow-scroll rounded-lg px-3 pb-4'>
                 <div className='flex justify-between gap-4 py-4 px-2 items-center'>
                     <h1 className='text-2xl font-bold'>Student Information</h1>
-                    <input type="text" placeholder='Search name...' onChange={(e) => setSearch(e.target.value)} className='border-b-2 focus:outline-0'/>
+                    <input type="text" placeholder='Search...' onChange={(e) => setSearch(e.target.value)} className='border-b-2 focus:outline-0'/>
                     <div className='flex gap-4'>
                         <button onClick={handleLogout} className='bg-red-700 px-3 py-1 rounded-md text-white'>Logout</button>
                         <Link to="/create" className='bg-green-700 px-3 py-1 rounded-md text-white'>Add +</Link>
@@ -78,6 +78,10 @@ const Home = () => {
                             if(search === ''){
                                 return each;
                             } else if(each.name.toLowerCase().includes(search.toLowerCase())) {
+                                return each;
+                            } else if(each.department.toLowerCase().includes(search.toLowerCase())) {
+                                return each;
+                            } else if(each.year.toLowerCase().includes(search.toLowerCase())) {
                                 return each
                             }
                         }).map((each, index) => {

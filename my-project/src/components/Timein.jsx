@@ -67,7 +67,7 @@ const Timein = () => {
                       <div className='flex flex-col mt-3'>
                         <input value={student_info_id} required onChange={handleUsn} type="number" placeholder='USN' className='bg-[#4A4A4A] remove-arrow text-[#ffffff] text-[12px] pr-20 pl-2 py-4 rounded-md border-[#929292] border-2' />
                       </div>
-                      <div className='flex flex-col mt-7'>
+                      <div className='flex flex-col mt-4'>
                         <input value={transaction} required onChange={handlePurpose} type="text" placeholder='Purpose' className='bg-[#4A4A4A] text-[#ffffff] text-[12px] pr-20 pl-2 py-4 rounded-md border-[#929292] border-2' />
                       </div>
                         <div className='w-24 flex gap-3 mt-3'>
