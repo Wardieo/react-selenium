@@ -1,0 +1,62 @@
+name: Selenium CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium webdriver-manager
+
+      - name: Install Node.js (for frontend app)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install frontend dependencies
+        run: |
+          cd my-project  # Change to your frontend project folder
+          npm install
+
+      - name: Start frontend server in the background
+        run: |
+          cd my-project
+          npm run start &
+          sleep 10  # Wait for the server to start
+
+      - name: Install Google Chrome
+        run: |
+          sudo apt remove google-chrome-stable -y || true
+          wget -q -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i chrome.deb || sudo apt-get -f install -y
+          google-chrome --version
+
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)
+          wget -q "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip" -O chromedriver.zip
+          unzip chromedriver.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+          chmod +x /usr/local/bin/chromedriver
+          chromedriver --version
+
+      - name: Run Selenium Tests
+        run: python3 test_login.py
