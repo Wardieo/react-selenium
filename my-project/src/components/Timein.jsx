@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from 'react'
+import React, {useEffect, useContext} from 'react'
 import bg from '../assets/bg.jpg'
 import img from '../assets/image.jpg'
 import arrow from '../assets/Right.png'
@@ -26,19 +26,22 @@ const Timein = () => {
   })
 
   const Submit = () => {
+    const formattedDate = new Date(date).toISOString().slice(0, 19).replace('T', ' '); // Format as 'YYYY-MM-DD HH:MM:SS'
+
     Axios.post('http://localhost:3001/create/', {
-      student_info_id: student_info_id,
-      transaction: transaction,
-      date: date
+        student_info_id: student_info_id,
+        transaction: transaction,
+        date: formattedDate,
     })
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-    
-    alert('Thank you!')
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+
+    alert('Thank you!');
     setStudent_info_id('');
     setTransaction('');
-    setTransaction('');
-  }
+    setDate('');
+  };
+
 
   return (
     <div style={{'background-image': `url(${bg})`}} className='overflow-y-hidden w-full flex flex-col items-center justify-center h-screen bg-no-repeat bg-center bg-cover'>
@@ -48,7 +51,8 @@ const Timein = () => {
               <div className='mt-10 flex flex-col gap-20 text-white'>
                 <div className='flex items-center gap-28'>
                   <div className='flex gap-4 text-[#D0D0D0] text-[10px] items-center'>
-                  <button><button className=' bg-[#4A4A4A]  px-3 py-1 rounded-sm'>Time in </button></button>
+                    <Link to='/login'>Login</Link>
+                    <button><button className=' bg-[#4A4A4A]  px-3 py-1 rounded-sm'>Time in </button></button>
                     <p>|</p>
                     <Link to="/attendance" className=' hover:border-b-[1px] border-[#DFD46F] items-center duration-100'>Attendance</Link>
                   </div>

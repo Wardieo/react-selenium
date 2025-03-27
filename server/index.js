@@ -118,19 +118,24 @@ app.post('/add', (req, res) => {
 })
 
 app.post('/create', (req, res) => {
-    const student_info_id = req.body.student_info_id
-    const transaction = req.body.transaction
-    const date = req.body.date
+    const student_info_id = req.body.student_info_id;
+    const transaction = req.body.transaction;
+    const date = new Date(req.body.date).toISOString().slice(0, 19).replace('T', ' '); // Format as 'YYYY-MM-DD HH:MM:SS'
 
-    db.query("INSERT INTO timein (student_info_id, transaction, date) VALUES (?,?,?)", 
-    [student_info_id, transaction, date], (err, result) => {
-        if (err) {
-            console.log(err)
-        }else{
-            res.send(result)
+    db.query(
+        "INSERT INTO timein (student_info_id, transaction, date) VALUES (?,?,?)",
+        [student_info_id, transaction, date],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send("Error inserting data");
+            } else {
+                res.send(result);
+            }
         }
-    })
-})
+    );
+});
+
 
 app.post('/login', (req, res) => {
     const sql = "SELECT * FROM login WHERE email = ? AND password = ?"
